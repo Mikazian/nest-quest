@@ -20,11 +20,15 @@ export class UsersService {
     });
   }
 
-  saveUser(user: User): Promise<User> {
-    return this.usersRepository.save(user);
+  async saveUser(user: User): Promise<User> {
+    return await this.usersRepository.save(user);
   }
 
   deleteUser(user: User): void {
     this.usersRepository.delete(user);
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return await this.usersRepository.findOneBy({ email: email });
   }
 }
